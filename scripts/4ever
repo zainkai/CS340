@@ -30,6 +30,9 @@ then
 elif [ $1 == "tmpstart" ]
 then
 	eval "node start $StartUpFile $PORTNUM"
+elif [ $1 == "list" ]
+then
+	eval "$staticForeverDir list"
 else
 	echo "$0: command not found"	
 fi
