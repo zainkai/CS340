@@ -1,0 +1,24 @@
+#!/bin/bash
+args=("$*")
+staticForeverDir="~/cs340/example/diagnostic/node_modules/forever/bin/forever"
+HOSTN=$(env | grep HOSTNAME);
+PORTNUM=(5678)
+StartUpFile="diagnostic.js"
+
+echo "Only use on OSU flip servers"
+echo $HOSTN
+#echo $args
+#echo $staticForeverDir
+
+if [ $1 == "start" ] && [ ! -z $HOSTN ]
+then
+	echo "creating a hostname file"
+	rm "4ever_start"
+	touch "4ever_start"
+	echo $HOSTN > "4ever_start"
+
+	
+	
+fi
+
+

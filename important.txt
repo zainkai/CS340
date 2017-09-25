@@ -1,0 +1,14 @@
+//To deploy
+//additional note keep track of what server the instance of forever is on. (flip1/2/3)
+./node_modules/forever/bin/forever diagnostic.js 5678
+
+//To view
+http://access.engr.oregonstate.edu:5678 
+
+//DBMS
+//username: cs340_turkingk
+//password: [last 4 numbers of osu id]
+// need to be logged in to VPN if off campus
+https://tools.engr.oregonstate.edu/phpMyAdmin/index.php?server=5
+
+
