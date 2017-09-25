@@ -2,8 +2,9 @@
 args=("$*")
 staticForeverDir="~/cs340/example/diagnostic/node_modules/forever/bin/forever"
 HOSTN=$(env | grep HOSTNAME);
-PORTNUM=(5678)
 StartUpFile="diagnostic.js"
+FileNM="4ever.tmp"
+PORTNUM=(5301)
 
 echo "Only use on OSU flip servers"
 echo $HOSTN
@@ -13,12 +14,14 @@ echo $HOSTN
 if [ $1 == "start" ] && [ ! -z $HOSTN ]
 then
 	echo "creating a hostname file"
-	rm "4ever_start"
-	touch "4ever_start"
-	echo $HOSTN > "4ever_start"
+	rm $FileNM
+	touch $FileNM
 
-	
-	
+	echo "HOSTNAME: $HOSTN" > $FileNM
+	echo "STARTUPFILE: $StartUpFile" >> $FileNM
+	echo "PORTNUMBER: $PORTNUM" >> $FILENM
+
+	eval "$staticForeverDir start $StartUpFile $PORTNUM"	
 fi
 
 
