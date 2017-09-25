@@ -21,7 +21,7 @@ then
 
 	echo "HOSTNAME: $HOSTN" > $FileNM
 	echo "STARTUPFILE: $StartUpFile" >> $FileNM
-	echo "PORTNUMBER: $PORTNUM" >> $FILENM
+	echo "PORTNUMBER: $PORTNUM" >> $FileNM
 
 	eval "$staticForeverDir start $StartUpFile $PORTNUM"
 elif [ $1 == "stop" ]

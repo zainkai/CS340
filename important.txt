@@ -4,6 +4,7 @@
 
 //To view
 http://access.engr.oregonstate.edu:5678 
+http://flip1.engr.oregonstate.edu:5301
 
 //DBMS
 //username: cs340_turkingk
