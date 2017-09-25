@@ -13,7 +13,7 @@ echo $HOSTN
 
 if [ $1 == "start" ] && [ ! -z $HOSTN ]
 then
-	echo "creating a hostname file"
+	echo -e "\nCreating a process info file"
 	rm $FileNM
 	touch $FileNM
 
