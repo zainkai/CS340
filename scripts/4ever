@@ -1,4 +1,6 @@
 #!/bin/bash
+#only use in projects without a package.json file.
+
 args=("$*")
 staticForeverDir="~/cs340/example/diagnostic/node_modules/forever/bin/forever"
 HOSTN=$(env | grep HOSTNAME);
@@ -21,7 +23,15 @@ then
 	echo "STARTUPFILE: $StartUpFile" >> $FileNM
 	echo "PORTNUMBER: $PORTNUM" >> $FILENM
 
-	eval "$staticForeverDir start $StartUpFile $PORTNUM"	
+	eval "$staticForeverDir start $StartUpFile $PORTNUM"
+elif [ $1 == "stop" ]
+then
+	eval "$staticForeverDir stop $2"
+elif [ $1 == "tmpstart" ]
+then
+	eval "node start $StartUpFile $PORTNUM"
+else
+	echo "$0: command not found"	
 fi
 
 
