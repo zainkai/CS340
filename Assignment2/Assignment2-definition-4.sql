@@ -15,7 +15,13 @@ DROP TABLE IF EXISTS `employee`;
 -- dob - a date type (you can read about it here http://dev.mysql.com/doc/refman/5.0/en/datetime.html)
 -- the combination of the first_name and last_name must be unique in this table
 
--- client table creation query replaces this text
+CREATE TABLE `client` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `first_name` VARCHAR(255) NOT NULL,
+    `last_name` VARCHAR(255) NOT NULL,
+    `dob` DATE,
+    CONSTRAINT full_name UNIQUE (first_name,last_name)
+) ENGINE=InnoDB;
 
 
 -- Create a table called employee with the following properties:
@@ -26,7 +32,14 @@ DROP TABLE IF EXISTS `employee`;
 -- date_joined - a date type 
 -- the combination of the first_name and last_name must be unique in this table
 
--- employee table creation query replaces this text
+CREATE TABLE `employee` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `first_name` VARCHAR(255) NOT NULL,
+    `last_name` VARCHAR(255) NOT NULL,
+    `dob` DATE,
+    `date_joined` DATE,
+    CONSTRAINT full_name UNIQUE (first_name,last_name)
+) ENGINE=InnoDB;
 
 
 -- Create a table called project with the following properties:
@@ -36,7 +49,13 @@ DROP TABLE IF EXISTS `employee`;
 -- notes - a text type
 -- the name of the project should be unique in this table
 
--- project table creation query replaces this text
+CREATE TABLE `project` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `cid` INT,
+    `name` VARCHAR(255) UNIQUE NOT NULL,
+    `notes` text,
+    FOREIGN KEY(`cid`) REFERENCES `client` (`id`)
+) ENGINE=InnoDB;
 
 
 -- Create a table called works_on with the following properties, this is a table representing a many-to-many relationship
@@ -46,7 +65,14 @@ DROP TABLE IF EXISTS `employee`;
 -- start_date - a date type 
 -- The primary key is a combination of eid and pid
 
--- works_on table creation query replaces this text
+CREATE TABLE `works_on` (
+    `eid` INT,
+    `cid` INT,
+    `start_date` DATE,
+    FOREIGN KEY(`cid`) REFERENCES `client` (`id`),
+    FOREIGN KEY(`eid`) REFERENCES `employee` (`id`),
+    PRIMARY KEY (`cid`,`eid`)
+) ENGINE=InnoDB;
 
 
 
@@ -55,15 +81,17 @@ DROP TABLE IF EXISTS `employee`;
 -- first_name: Sara
 -- last_name: Smith
 -- dob: 1/2/1970
+INSERT INTO client (first_name,last_name,dob) VALUES ('Sara','Smith','1970-01-02');
 
 -- first_name: David
 -- last_name: Atkins
 -- dob: 11/18/1979
+INSERT INTO client (first_name,last_name,dob) VALUES ('David','Atkins','1979-11-18');
 
 -- first_name: Daniel
 -- last_name: Jensen
 -- dob: 3/2/1985
-
+INSERT INTO client (first_name,last_name,dob) VALUES ('Daniel','Jensen','1985-03-02');
 
 
 -- insert the following into the employee table:
@@ -72,16 +100,19 @@ DROP TABLE IF EXISTS `employee`;
 -- last_name: Lowd
 -- dob: 1/2/1975
 -- date_joined: 1/1/2009
+INSERT INTO employee (first_name,last_name,dob,date_joined) VALUES ('Adam','Lowd','1975-01-02','2009-01-01');
 
 -- first_name: Michael
 -- last_name: Fern
 -- dob: 10/18/1980
 -- date_joined: 6/5/2013
+INSERT INTO employee (first_name,last_name,dob,date_joined) VALUES ('Michael','Fern','1980-10-18','2013-06-05');
 
 -- first_name: Deena
 -- last_name: Young
 -- dob: 3/21/1984
 -- date_joined: 11/10/2013
+INSERT INTO employee (first_name,last_name,dob,date_joined) VALUES ('Deena','Young','1984-03-21','2013-11-10');
 
 
 
