@@ -1,0 +1,81 @@
+Quiz 5:
+
+1.) All of the above.
+
+2.) True
+
+3.) 
+	DELETE FROM DOCTOR WHERE ...
+
+4.)
+SELECT student_name, AVG(test_score)
+
+FROM student
+
+GROUP BY student_name;
+
+5.) //wrong review weeks 4 and 5
+
+SELECT fname, lname
+
+FROM EMPLOYEE
+
+WHERE fname LIKE 'k%' AND ssn IN ( SELECT ssn
+
+        FROM PROFESSOR
+
+        WHERE title = 'assistant');
+
+
+
+SELECT fname, lname
+
+FROM EMPLOYEE INNER JOIN PROFESSOR ON EMPLOYEE.ssn = PROFESSOR.ssn
+
+WHERE fname LIKE "k%" AND title = 'assistant';
+
+6.) True
+
+7.) distinct
+
+8.) SELECT first_name WHERE first_name='David' and last_name='Smith';
+
+9.) True
+
+10.) Nexus
+
+SELECT planet.name, COUNT(*) AS CertCount
+FROM bsg_cert_people certs
+
+JOIN bsg_people ppl ON ppl.id = certs.pid
+JOIN bsg_planets planet ON planet.id = ppl.homeworld
+
+GROUP BY planet.name
+
+11.) glider
+
+SELECT DISTINCT ppl.fname, ppl.lname
+FROM bsg_people ppl
+
+LEFT JOIN bsg_cert_people cp  ON cp.pid = ppl.id 
+LEFT JOIN bsg_cert c ON c.id = cp.cid AND c.title = 'viper'
+
+JOIN bsg_ship_assignment sa ON sa.pid = ppl.id
+JOIN bsg_ship_instance si ON si.id = sa.sid AND si.class = sa.cid
+JOIN bsg_ship_class sc ON sc.id = si.class
+
+WHERE sc.name = 'viper';
+
+12.) lamy
+
+SELECT DISTINCT ppl.fname, ppl.lname, si.id
+FROM bsg_people ppl
+
+LEFT JOIN bsg_cert_people cp  ON cp.pid = ppl.id 
+LEFT JOIN bsg_cert c ON c.id = cp.cid
+
+JOIN bsg_ship_assignment sa ON sa.pid = ppl.id
+JOIN bsg_ship_instance si ON si.id = sa.sid AND si.class = sa.cid
+JOIN bsg_ship_class sc ON sc.id = si.class
+
+WHERE sc.name = 'viper' AND (NOT c.title = 'viper' OR c.id IS NULL) AND NOT ppl.fname = 'lee'
