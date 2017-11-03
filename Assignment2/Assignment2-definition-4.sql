@@ -121,15 +121,27 @@ INSERT INTO employee (first_name,last_name,dob,date_joined) VALUES ('Deena','You
 -- cid - reference to first_name: Sara last_name: Smith
 -- name - Diamond
 -- notes - Should be done by Jan 2017
+INSERT INTO project (cid,name,notes) VALUES (
+    (SELECT id FROM client WHERE first_name='Sara' AND last_name='Smith'),
+    'diamond',
+    'Should be done by Jan 2017'
+);
 
 -- cid - reference to first_name: David last_name: Atkins
 -- name - Eclipse
 -- notes - NULL
+INSERT INTO project (cid,name) VALUES (
+    (SELECT id FROM client WHERE first_name='David' AND last_name='Atkins'),
+    'Eclipse'
+);
 
 -- cid - reference to first_name: Daniel last_name: Jensen
 -- name - Moon 
 -- notes - NULL
-
+INSERT INTO project (cid,name) VALUES (
+    (SELECT id FROM client WHERE first_name='Daniel' AND last_name='Jensen'),
+    'Moon'
+);
 
 
 -- insert the following into the works_on table using subqueries to look up data as needed:
@@ -137,15 +149,28 @@ INSERT INTO employee (first_name,last_name,dob,date_joined) VALUES ('Deena','You
 -- employee: Adam Lowd
 -- project: Diamond
 -- start_date: 1/1/2012
+INSERT INTO works_on (eid,cid,start_date) VALUES (
+    (SELECT id FROM employee WHERE first_name='Adam' AND last_name='Lowd'),
+    (SELECT cid FROM project WHERE name='Diamond'),
+    '2012-01-01'
+);
 
 
 -- employee: Michael Fern
 -- project: Eclipse
 -- start_date: 8/8/2013
-
+INSERT INTO works_on (eid,cid,start_date) VALUES (
+    (SELECT id FROM employee WHERE first_name='Michael' AND last_name='Fern'),
+    (SELECT cid FROM project WHERE name='Eclipse'),
+    '2013-08-08'
+);
 
 -- employee: Michael Fern
 -- project: Moon
 -- start_date: 9/11/2014
-
+INSERT INTO works_on (eid,cid,start_date) VALUES (
+    (SELECT id FROM employee WHERE first_name='Michael' AND last_name='Fern'),
+    (SELECT cid FROM project WHERE name='Moon'),
+    '2014-09-11'
+);
 
